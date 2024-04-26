@@ -1,0 +1,19 @@
+{
+  "name": "dangnhap",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Heartnet2411/DangKyHocPhan.git"
+  },
+  "author": "Heartnet",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Heartnet2411/DangKyHocPhan/issues"
+  },
+  "homepage": "https://github.com/Heartnet2411/DangKyHocPhan#readme"
+}
