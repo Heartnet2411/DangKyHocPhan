@@ -1,12 +1,18 @@
 // Login.js
-import React from 'react'
+import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 function Login({ onLogin }) {
+    const navigate = useNavigate()
     const handleSubmit = (event) => {
         event.preventDefault()
         const { username, password } = event.target.elements
         onLogin(username.value, password.value)
+        navigate('/main') // navigate to main page after form submission
     }
+
+    const [username, setUsername] = useState('')
+    const [password, setPassword] = useState('')
 
     return (
         <div>
@@ -46,6 +52,7 @@ function Login({ onLogin }) {
                             type="text"
                             name="username"
                             placeholder="Nhập mã sinh viên"
+                            value={username}
                             required
                         />
                     </div>
@@ -54,11 +61,14 @@ function Login({ onLogin }) {
                             type="password"
                             name="password"
                             placeholder="Nhập mật khẩu"
+                            value={password}
                             required
                         />
                     </div>
                     <div>
-                        <button type="submit">Đăng nhập</button>
+                        <button type="submit" onClick={() => navigate('/main')}>
+                            Đăng nhập
+                        </button>
                     </div>
                 </form>
             </div>

@@ -7,10 +7,7 @@ function Main() {
             <header>
                 <div>
                     <a href="/">
-                        <img
-                            src="https://media.iuh.edu.vn/Media/2_sviuh/Images/iuh7313e0f8-4-e.png"
-                            style={{ maxHeight: '40' }}
-                        />
+                        <img src="https://media.iuh.edu.vn/Media/2_sviuh/Images/logo-svd516f114-e-e.png" />
                     </a>
                 </div>
                 <div>
