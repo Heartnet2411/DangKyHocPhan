@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "express": "^4.19.2",
     "global": "^4.4.0",
     "npx": "^3.0.0",
     "react-router-dom": "^6.23.0"
