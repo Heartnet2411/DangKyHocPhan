@@ -29,6 +29,15 @@ function Main() {
                     </ul>
                 </div>
             </header>
+            <body>
+                <div>
+                    <div></div>
+                    <div>
+                        <div></div>
+                        <div></div>
+                    </div>
+                </div>
+            </body>
         </div>
     )
 }
