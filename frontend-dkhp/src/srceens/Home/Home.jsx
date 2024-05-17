@@ -1,7 +1,25 @@
 // Main.js
 import React from 'react'
+import { useSelector, useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { onViewProfile } from '../../store/actions';
+import { useNavigate } from 'react-router-dom';
+
 
 function Home() {
+    const { student, profile } = useSelector((state) => state.studentReducer);
+const dispatch = useDispatch();
+const {id, token } = student;
+const navigate = useNavigate();
+useEffect(() => {
+    if (token) {
+        dispatch(onViewProfile());
+        //console.log(id)
+    }
+}
+, [token]);
+
+
     return (
         <div>
             <header>
@@ -24,7 +42,7 @@ function Home() {
                             <a href="#">Xem thông tin </a>
                         </li>
                         <li>
-                            <a href="#">Đăng ký học phần </a>
+                            <a>Đăng ký học phần </a>
                         </li>
                     </ul>
                 </div>

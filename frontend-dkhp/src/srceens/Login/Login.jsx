@@ -7,15 +7,15 @@ import { useDispatch, useSelector } from "react-redux";
 export const Login = () => {
   const { student, profile } = useSelector((state) => state.studentReducer);
   const dispatch = useDispatch();
-  const { id, token } = student;
-  useEffect(() => {
-    if (token) {
-      //dispatch(onViewProfile());
-      // navigate('/profile')
-    }
-  }, [token]);
+  const { token } = student;
+  const {id} = student;
+  // useEffect(() => {
+    // if (student.id) {
+      // console.log(student.id); // or do something with the id
+    // }
+  // }, [student.id]);
 
-  
+  // 
   const [studentID, setStudentID] = useState("");
   const [password, setPassword] = useState("");
   const [error,setError]= useState(null)
@@ -24,9 +24,9 @@ export const Login = () => {
    // event.preventDefault();
  dispatch(onLogin({ studentID, password }))
  .then((res) => {
-    if (res) {
+    if (res) {  
       navigate("/home");
-      console.log(id)
+      //console.log(student.id)
     }
     else{
         setError("Sai tài khoản hoặc mật khẩu")

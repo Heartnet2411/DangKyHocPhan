@@ -68,5 +68,14 @@ class StudentService {
         console.log('err',error)
         }
     }
+    async getProfile(id) {
+        try {
+        const data = await this.repository.FindStudentByID({id});
+            return FormateData(data);
+        } catch (error) {
+        //throw new APIError("Data not found", error);
+        console.log('err',error)
+        }
+    }
 }
 module.exports = StudentService;
