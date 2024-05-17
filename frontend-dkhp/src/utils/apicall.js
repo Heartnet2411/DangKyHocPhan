@@ -1,54 +1,52 @@
-import api from 'axios';
+import api from "axios";
 
- 
 api.defaults.baseURL = "http://localhost:3001/";
 
 const setHeader = () => {
-    const token = localStorage.getItem('token');
-    if(token){
-      api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-    }
-}
+  const token = localStorage.getItem("token");
+  if (token) {
+    api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  } else {
+    delete api.defaults.headers.common["Authorization"];
+  }
+};
 
-export const GetData = async(endPoint,options) => {
+export const GetData = async (endPoint, options) => {
   try {
     setHeader();
     const response = await api.get(endPoint);
-    return response
+    return response;
   } catch (err) {
-      throw err;
+    throw err;
   }
-    
-}
+};
 
-export const PostData = async(endPoint,options) => {
+export const PostData = async (endPoint, options) => {
   try {
     setHeader();
     const response = await api.post(endPoint, options);
-    return response
+    return response;
   } catch (err) {
-      throw err;
-  }  
-}
+    throw err;
+  }
+};
 
-export const PutData = async(endPoint,options) => {
-
+export const PutData = async (endPoint, options) => {
   try {
     setHeader();
     const response = await api.put(endPoint, options);
-    return response
+    return response;
   } catch (err) {
-      throw err;
-  }  
-}
+    throw err;
+  }
+};
 
-export const DeleteData = async(endPoint) => {
-
+export const DeleteData = async (endPoint) => {
   try {
     setHeader();
     const response = await api.delete(endPoint);
-    return response
+    return response;
   } catch (err) {
-      throw err;
-  }  
-}
+    throw err;
+  }
+};

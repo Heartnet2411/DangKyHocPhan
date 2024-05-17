@@ -1,40 +1,44 @@
 // Login.js
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { onLogin } from "../../store/actions";
+import { onLogin, onViewProfile, onFetchProfile } from "../../store/actions";
 import { useDispatch, useSelector } from "react-redux";
 
 export const Login = () => {
   const { student, profile } = useSelector((state) => state.studentReducer);
   const dispatch = useDispatch();
   const { id, token } = student;
-  useEffect(() => {
-    if (token) {
-      //dispatch(onViewProfile());
-      // navigate('/profile')
-    }
-  }, [token]);
 
-  
+  //, { state: { id } }
+
   const [studentID, setStudentID] = useState("");
   const [password, setPassword] = useState("");
-  const [error,setError]= useState(null)
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
+  // const location = useLocation();
+  // console.log(student);
   const handleSubmit = () => {
-   // event.preventDefault();
- dispatch(onLogin({ studentID, password }))
- .then((res) => {
-    if (res) {
-      navigate("/home");
-      console.log(id)
-    }
-    else{
-        setError("Sai tài khoản hoặc mật khẩu")
-    }
+    // event.preventDefault();
+    dispatch(onLogin({ studentID, password })).then((res) => {
+      if (res) {
+        dispatch(onViewProfile({ studentID })); //change onView / onFetch
+        navigate("/home");
+        console.log(id);
+      } else {
+        setError("Sai tài khoản hoặc mật khẩu");
+      }
     });
     //navigate('/home')
     //navigate('/home')
   };
+  //change onFetch / onView or studentID / id
+  useEffect(() => {
+    if (token) {
+      dispatch(onFetchProfile(studentID)); // fetch the profile
+      // dispatch(onViewProfile({ studentID }));
+      // navigate('/profile')
+    }
+  }, [token, dispatch, studentID]);
 
   return (
     <div>
@@ -88,9 +92,14 @@ export const Login = () => {
           </div>
           {error && <p>{error}</p>}
           <div>
-            <button type="button" onClick={()=>{
-                handleSubmit()
-            }}>Đăng nhập</button>
+            <button
+              type="button"
+              onClick={() => {
+                handleSubmit();
+              }}
+            >
+              Đăng nhập
+            </button>
           </div>
         </form>
       </div>

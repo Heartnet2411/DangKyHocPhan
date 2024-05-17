@@ -70,18 +70,36 @@ class StudentService {
       console.log("err", error);
     }
   }
-  async GetProfile(id) {
+  // async GetProfile(id) {
+  //   try {
+  //     const student = await this.repository.FindStudentByID(id);
+  //     if (!student) {
+  //       throw new APIError("Student not found", STATUS_CODES.NOT_FOUND);
+  //     }
+  //     return FormateData(student);
+  //   } catch (error) {
+  //     console.log("err", error);
+  //     throw new APIError(
+  //       "An error occurred while fetching the profile",
+  //       STATUS_CODES.INTERNAL_SERVER_ERROR
+  //     );
+  //   }
+  // }
+  async FindStudentByID({ id }) {
     try {
-      const student = await this.repository.FindStudentById(id);
-      if (!student) {
-        throw new APIError("Student not found", STATUS_CODES.NOT_FOUND);
-      }
-      return FormateData(student);
+      const student = await Student.findById(id)
+        .populate("name")
+        .populate("gender")
+        .populate("studentID")
+        .populate("email")
+        .populate("department")
+        .populate("phoneNumber");
+      return student;
     } catch (error) {
-      console.log("err", error);
       throw new APIError(
-        "An error occurred while fetching the profile",
-        STATUS_CODES.INTERNAL_SERVER_ERROR
+        "APIError",
+        STATUS_CODES.INTERNAL_ERROR,
+        "Error in find student by ID"
       );
     }
   }

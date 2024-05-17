@@ -1,4 +1,5 @@
 import { GetData, PostData } from "../../utils";
+import axios from "axios";
 import { Action } from "../actions";
 
 export const SetAuthToken = async (token) => {
@@ -50,26 +51,53 @@ export const onLogin =
     }
   };
 
-export const onViewProfile = () => async (dispatch) => {
-  //   try {
+// export const onViewProfile =
+//   ({ studentID }) =>
+//   async (dispatch) => {
+//     try {
+//       const token = localStorage.getItem("token");
+//       if (!token) {
+//         throw new Error("No token found");
+//       }
 
-  //     const response = await GetData('/customer/profile');
+//       const response = await GetData("/student/profile", studentID);
 
-  //     return dispatch({ type:  Action.PROFILE, payload: response.data });
+//       return dispatch({ type: Action.PROFILE, payload: response.data });
+//     } catch (err) {
+//       console.log(err);
+//     }
+//   };
 
-  // } catch (err) {
-  //   console.log(err)
-  // }
-  try {
-    const token = localStorage.getItem("token");
-    if (!token) {
-      throw new Error("No token found");
+export const onViewProfile =
+  ({ studentID }) =>
+  async (dispatch) => {
+    try {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        throw new Error("No token found");
+      }
+
+      const response = await axios.get(`/student/profile/${studentID}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      return dispatch({ type: Action.PROFILE, payload: response.data });
+    } catch (err) {
+      console.log(err);
     }
+  };
 
-    const response = await GetData("/student/profile", token);
-
-    return dispatch({ type: Action.PROFILE, payload: response.data });
-  } catch (err) {
-    console.log(err);
-  }
+export const logout = () => {
+  return { type: "LOGOUT" };
 };
+
+export const onFetchProfile =
+  ({ id }) =>
+  async (dispatch) => {
+    try {
+      const res = await axios.get(`student/profile/${id}`);
+      dispatch({ type: "FETCH_PROFILE_SUCCESS", payload: res.data });
+    } catch (error) {
+      dispatch({ type: "FETCH_PROFILE_ERROR", error });
+    }
+  };

@@ -1,20 +1,36 @@
 // Main.js
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { onViewProfile } from "../../store/actions";
+import { onViewProfile, logout, onFetchProfile } from "../../store/actions";
 
 function Home() {
   const { student, profile } = useSelector((state) => state.studentReducer);
   const dispatch = useDispatch();
   const { id, token } = student;
-
+  const navigate = useNavigate();
+  const location = useLocation();
+  // const userId = location.state.id;
+  console.log(student.id);
+  //change onView / onFetch or student.id / id / token
   useEffect(() => {
-    if (token) {
-      dispatch(onViewProfile());
+    if (student.id) {
+      dispatch(onFetchProfile(student.id));
     }
-  }, [token]);
+  }, [student.id, dispatch]);
 
+  // useEffect(() => {
+  //   if (token) {
+  //     dispatch(onFetchProfile(profile));
+  //   }
+  // }, [token]);
+
+  console.log(profile);
+
+  const handleLogout = () => {
+    dispatch(logout()); // Dispatch logout action
+    navigate("/");
+  };
   return (
     <div>
       <header>
@@ -40,6 +56,9 @@ function Home() {
               <a href="#">Đăng ký học phần </a>
             </li>
           </ul>
+        </div>
+        <div>
+          <button onClick={handleLogout}>Đăng xuất</button>
         </div>
       </header>
       {profile && (
