@@ -4,6 +4,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { onViewProfile, logout } from "../../store/actions";
 import { useNavigate } from "react-router-dom";
+import { FaSearch } from "react-icons/fa";
+
+import "./Home.css";
 
 function Home() {
   const { student, profile } = useSelector((state) => state.studentReducer);
@@ -34,7 +37,7 @@ function Home() {
           <form>
             <input type="text" placeholder="Tìm kiếm..." required />
             <button type="submit">
-              <i class="fa fa-search" aria-hidden="true"></i>
+              <FaSearch />
             </button>
           </form>
         </div>
