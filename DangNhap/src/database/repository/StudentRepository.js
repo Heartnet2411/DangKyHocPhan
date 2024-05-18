@@ -50,36 +50,19 @@ class StudentRepository {
       console.log("err", error);
     }
   }
-  async FindStudentByID({ id }) {
+  async FindStudentByID( {id} ) {
     try {
-      const student = await Student.findById(id)
-        .populate("name")
-        .populate("gender")
-        .populate("studentID")
-        .populate("email")
-        .populate("department")
-        .populate("phoneNumber");
+      const student = await Student.findById(id);
       return student;
     } catch (error) {
-      throw new APIError(
-        "APIError",
-        STATUS_CODES.INTERNAL_ERROR,
-        "Error in find student by ID"
-      );
+      // throw new APIError(
+        // "APIError",
+        // STATUS_CODES.INTERNAL_ERROR,
+        // "Error in find student by ID"
+     // );
+     console.log(error)
     }
   }
-  // async FindStudentByID ({id}){
-  //   try{
-  //     const student = await Student.findById(id);
-  //     return student;
-  //   }catch(error){
-  //     throw new APIError(
-  //       "APIError",
-  //       STATUS_CODES.INTERNAL_ERROR,
-  //       "Error in find student by ID",
-  //     )
-  //   }
-  // }
 }
 
 module.exports = StudentRepository;

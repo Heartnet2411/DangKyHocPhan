@@ -31,17 +31,18 @@ module.exports = (app) => {
       res.json(error);
     }
   });
-
   app.get("/student/profile", auth, async (req, res, next) => {
     try {
-      const { id } = req.user;
-      const { data } = await service.GetProfile(id);
-      if (!data) {
-        return res.status(404).json("Profile not found");
-      }
+      const { _id } = req.student;
+      console.log(req.student);
+      const { data } = await service.getProfile({ _id });
+      // if (data === "data not found") {
+        // return res.status(404).json(data);
+      // }
+
       return res.status(200).json(data);
     } catch (error) {
-      res.status(500).json(error);
+     console.log(error)
     }
   });
 };

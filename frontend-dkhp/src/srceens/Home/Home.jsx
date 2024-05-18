@@ -1,36 +1,27 @@
 // Main.js
-import React, { useState, useEffect } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { onViewProfile, logout, onFetchProfile } from "../../store/actions";
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { onViewProfile, logout } from "../../store/actions";
+import { useNavigate } from "react-router-dom";
 
 function Home() {
   const { student, profile } = useSelector((state) => state.studentReducer);
   const dispatch = useDispatch();
   const { id, token } = student;
   const navigate = useNavigate();
-  const location = useLocation();
-  // const userId = location.state.id;
-  console.log(student.id);
-  //change onView / onFetch or student.id / id / token
   useEffect(() => {
-    if (student.id) {
-      dispatch(onFetchProfile(student.id));
+    if (token) {
+      dispatch(onViewProfile());
+      //console.log(id)
     }
-  }, [student.id, dispatch]);
-
-  // useEffect(() => {
-  //   if (token) {
-  //     dispatch(onFetchProfile(profile));
-  //   }
-  // }, [token]);
-
-  console.log(profile);
+  }, [token]);
 
   const handleLogout = () => {
     dispatch(logout()); // Dispatch logout action
     navigate("/");
   };
+
   return (
     <div>
       <header>
@@ -53,10 +44,11 @@ function Home() {
               <a href="#">Xem thông tin </a>
             </li>
             <li>
-              <a href="#">Đăng ký học phần </a>
+              <a>Đăng ký học phần </a>
             </li>
           </ul>
         </div>
+
         <div>
           <button onClick={handleLogout}>Đăng xuất</button>
         </div>
