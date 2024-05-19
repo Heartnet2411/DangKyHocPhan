@@ -40,10 +40,10 @@ export const onLogin =
       });
       const { token } = response.data;
       //console.log(token)
-      if (token!==undefined){
-      await SetAuthToken(token);
+      if (token !== undefined) {
+        await SetAuthToken(token);
 
-      return dispatch({ type: Action.LOGIN, payload: response.data });
+        return dispatch({ type: Action.LOGIN, payload: response.data });
       }
     } catch (err) {
       console.log(err);
@@ -58,4 +58,7 @@ export const onViewProfile = () => async (dispatch) => {
   } catch (err) {
     console.log(err);
   }
+};
+export const logout = () => {
+  return { type: "LOGOUT" };
 };

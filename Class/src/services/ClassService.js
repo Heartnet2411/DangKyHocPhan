@@ -1,4 +1,4 @@
-const  ClassRepository  = require("../database/repository/ClassRepository");
+const ClassRepository = require("../database/repository/ClassRepository");
 const {
   APIError,
   BadRequestError,
@@ -11,32 +11,42 @@ const {
   GenerateSignature,
   ValidatePassword,
 } = require("../utils");
-class StudentService {
+class ClassService {
   constructor() {
     this.repository = new ClassRepository();
   }
-  async RegisterClass(){
+  async CreateClass(classInputs) {
     try {
-      const { className, department, teacher, course, classRequire, classSchedule, startDate, endDate, room, student, limitStudent, credit, expectedClass } = req.body;
-      const {result} = await this.repository.CreateClass({
+      const {
         className,
+        classID,
         department,
-        teacher,
         course,
         classRequire,
-        classSchedule,
-        startDate,
-        endDate,
-        room,
-        student,
-        limitStudent,
         credit,
-        expectedClass,
+        details,
+      } = classInputs;
+      const result = await this.repository.CreateClass({
+        className,
+        classID,
+        department,
+        course,
+        classRequire,
+        credit,
+        details,
       });
       return result;
     } catch (error) {
       console.log("err", error);
     }
   }
+  async GetAllClass() {
+    try {
+      const data = await this.repository.getAllClass();
+      return data;
+    } catch (error) {
+      console.log("err", error);
+    }
+  }
 }
-module.exports = StudentService;
+module.exports = ClassService;

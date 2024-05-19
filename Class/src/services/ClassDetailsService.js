@@ -1,4 +1,6 @@
-const ClassDetailsRepository= require("../database/repository/ClassDetailsRepository");
+const ClassDetailsRepository = require("../database/repository/ClassDetailsRepository");
+//const ClassRepository = require("../database/repository/ClassRepository");
+
 const {
   APIError,
   BadRequestError,
@@ -17,27 +19,31 @@ class ClassDetailsService {
   }
   async CreateClassDetails({
     classID,
+    detailsID,
     studentID,
     classified,
     grade,
     totalGrade,
   }) {
     try {
-      const result = await this.repository.CreateClassDetails({
+      const data = await this.repository.CreateClassDetails({
         classID,
+        detailsID,
         studentID,
         classified,
         grade,
         totalGrade,
       });
-      return result;
+
+      return FormateData(data);
     } catch (error) {
       console.log("err", error);
     }
   }
-  async FindClassDetailsByClassID({ classID }) {
+  async FindClassDetailsByDetailsID({ detailsID }) {
     try {
-      const ResultClassDetails = await this.repository.FindClassDetailsByClassID({ classID });
+      const ResultClassDetails =
+        await this.repository.FindClassDetailsByDetailsID({ detailsID });
       return ResultClassDetails;
     } catch (error) {
       console.log("err", error);
@@ -45,10 +51,13 @@ class ClassDetailsService {
   }
   async FindClassDetailsByStudentID({ studentID }) {
     try {
-      const ResultClassDetails = await this.repository.FindClassDetailsByStudentID({ studentID });
+      const ResultClassDetails =
+        await this.repository.FindClassDetailsByStudentID({ studentID });
       return ResultClassDetails;
     } catch (error) {
       console.log("err", error);
     }
   }
+  
 }
+module.exports = ClassDetailsService;

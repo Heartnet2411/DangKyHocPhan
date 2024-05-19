@@ -7,34 +7,22 @@ const {
 class ClassRepository {
   async CreateClass({
     className,
+    classID,
     department,
-    teacher,
     course,
     classRequire,
-    classSchedule,
-    startDate,
-    endDate,
-    room,
-    student,
-    limitStudent,
     credit,
-    expectedClass,
+    details,
   }) {
     try {
       const newClass = new Class({
         className,
+        classID,
         department,
-        teacher,
         course,
         classRequire,
-        classSchedule,
-        startDate,
-        endDate,
-        room,
-        student,
-        limitStudent,
         credit,
-        expectedClass,
+        details,
       });
       const resultClass = await newClass.save().then(() => {
         console.log("Save");
@@ -74,21 +62,30 @@ class ClassRepository {
       );
     }
   }
-  async getAllClass(){
+  async getAllClass() {
     try {
-      const rs = await Class.find();
-      return rs;
+      const data = await Class.find();
+      return data;
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   }
-  async getClassByDepartment({department}){
+  async getClassByDepartment({ department }) {
     try {
-      const rs = await Class.find({department});
+      const rs = await Class.find({ department });
       return rs;
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
+  }
+  async findClassIdByDetailsId({detailsID}) {
+    const classObj = await Class.findOne({ 'details._id': detailsId });
+    return classObj ? classObj.classID : null;
   }
 }
+
+
+
+
+
 module.exports = ClassRepository;

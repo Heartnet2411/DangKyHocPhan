@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 require("../../../../DangNhap/src/database/models/Student");
+
 const grade = new mongoose.Schema({
   regular: {
     type: Number,
@@ -13,9 +14,15 @@ const grade = new mongoose.Schema({
 });
 const ClassDetailsSchema = new mongoose.Schema(
   {
-    classID: {
+    classID:{
       type: String,
       required: true,
+      ref: "Class",
+    },
+   detailsID: {
+      type: String,
+      required: true,
+      ref: "Class",
     },
     studentID: {
       type: String,
