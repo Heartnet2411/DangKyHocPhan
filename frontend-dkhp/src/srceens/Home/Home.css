@@ -9,6 +9,7 @@ div {
     align-items: center;
     padding: 20px;
     background-color: #f5f5f5;
+    flex-direction: row;
   }
   
   header div {
@@ -24,6 +25,7 @@ div {
   header form {
     display: flex;
     align-items: center;
+    flex-direction: row;
   }
   
   header input[type="text"] {
@@ -60,4 +62,23 @@ div {
     font-size: 16px;
     margin-left: 10px;
     cursor: pointer;
+  }
+
+  .profile {
+    width: 60%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f5f5f5;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .profile h1 {
+    text-align: center;
+    color: #333;
+  }
+  
+  .profile p {
+    font-size: 18px;
+    line-height: 1.6;
   }

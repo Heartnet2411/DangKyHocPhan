@@ -41,7 +41,7 @@ div {
   }
   
   form button {
-    background-color: #af4c4c; /* Green */
+    background-color: #4CAF50; /* Green */
     border: none;
     color: white;
     padding: 15px 32px;
@@ -49,6 +49,7 @@ div {
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
+    border-radius: 10px;
   }
   
   p {
